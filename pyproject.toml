@@ -6,10 +6,59 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = []
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/expenses_demo"]
+
+
 [dependency-groups]
 dev = [
     "prek>=0.3.8",
+    "pytest-cov>=7.1.0",
     "pytest>=9.0.2",
     "ruff>=0.15.9",
     "ty>=0.0.28",
+    "genbadge[coverage]>=1.1.3",
 ]
+
+[tool.ruff]
+# Match your active 3.13 environment
+target-version = "py313"
+line-length = 88
+
+[tool.ruff.lint]
+# Keep your existing selection
+select = ["F", "I", "E", "W", "UP"]
+
+[tool.ty.environment]
+# This is the most common fix for src-layout diagnostics
+# It tells ty where the 'First Party' code starts.
+extra-paths = ["src"]
+
+[tool.ty.analysis]
+# Ensure ty respects your existing type ignores from other checkers
+respect-type-ignore-comments = true
+
+[tool.pytest.ini_options]
+# This tells pytest: "Always look inside 'src' for my packages"
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "--cov=PROJECT-NAME --cov-report=term-missing --cov-report=html --cov-report=xml"
+
+[tool.coverage.run]
+source = ["."]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == \"__main__\":",
+    "raise NotImplementedError",
+]
+
+[project.scripts]
+main = "PROJECT-MAIN:main"
