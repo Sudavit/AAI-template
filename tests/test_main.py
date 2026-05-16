@@ -33,7 +33,7 @@ def test_main_execution_coverage():
 
 def test_main_outputs_correct_greeting(capsys):
     """
-    RED/GREEN TEST: Validates that main() prints the specific AAI greeting.
+    RED/GREEN TEST: main() prints the specific AAI greeting.
     Verification status: PENDING -> PASSED
     """
     # Act
