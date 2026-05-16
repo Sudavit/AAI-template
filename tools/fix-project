@@ -19,6 +19,6 @@ else                                                     # BSD/MacOS
 fi
 git mv src/AAI src/$project_name
 
-sed -i 's/<year>/'$year'/; s/<name>/'$name'/' 
+sed -i 's/<year>/'$year'/; s/<name>/'$name'/'
 
 echo 'Now write a good README.md!!!'
