@@ -7,8 +7,8 @@ gnu_sed() { sed --version &> /dev/null; }
 
 project_name=$(basename $PWD | tr '-' '_')
 files=$(git grep -l AAI | grep -v $(basename $0))
-name=$(git config user.name)
-year=$(date +%Y)
+name="$(git config user.name)"
+year="$(date +%Y)"
 
 if gnu_sed >/dev/null 2>&1; then                         # Linux
     sed -i "s/AAI/$project_name/g" $files
@@ -19,6 +19,5 @@ else                                                     # BSD/MacOS
 fi
 git mv src/AAI src/$project_name
 
-sed -i 's/<year>/'$year'/; s/<name>/'$name'/'
 
 echo 'Now write a good README.md!!!'
